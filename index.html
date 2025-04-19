@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dear Nobody Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-color: #1a1a1a;
+      color: #ffffff;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #1a1a1a;
+      animation: fadeSlideIn 1.5s ease-in-out;
+    }
+
+    header h1 {
+      font-family: 'Yeseva One', cursive; /* Apply Yeseva One font */
+      font-size: 2.5rem;
+      margin: 0;
+      text-transform: none;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    header h1 span {
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 1rem 0;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #5c2a3b;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.5s ease;
+      margin-top: 1rem;
+    }
+
+    a.button:hover {
+      background-color: #d6cfc4;
+      color: #1a1a1a;
+    }
+
+    form {
+      margin-top: 1.5rem;
+      max-width: 600px;
+      width: 100%;
+      padding: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      resize: vertical;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+    }
+
+    button.submit-btn {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffcc00;
+      color: #1a1a1a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.4s ease;
+    }
+
+    button.submit-btn:hover {
+      background-color: #e6b800;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem;
+      flex-grow: 1;
+    }
+
+    section {
+      margin-bottom: 2rem;
+      animation: fadeSlideIn 1.5s ease-in-out;
+      animation-fill-mode: both;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #ffcc00;
+      cursor: pointer;
+    }
+
+    h2:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .content {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <script>
+    function toggleContent(section) {
+      const content = document.getElementById(section);
+      const isVisible = content.style.display === 'block';
+
+      const allSections = document.querySelectorAll('.content');
+      allSections.forEach(s => s.style.display = 'none');
+
+      if (!isVisible) {
+        content.style.display = 'block';
+      }
+    }
+
+    function sendToWhatsApp(event) {
+      event.preventDefault();
+      const textarea = document.querySelector('textarea[name="story"]');
+      const message = encodeURIComponent(textarea.value.trim());
+      if (message) {
+        window.open(`https://wa.me/2348108031722?text=${message}`, '_blank');
+      } else {
+        alert("Please type your story before sending.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1><span>DEAR</span> Nobody</h1>
+    <p>Stories for the heartbroken, the hopeful, and the unheard. <br>
+    Want yours told? Submit your story anonymously.</p>
+    <a href="https://wa.me/2348108031722" class="button">Submit on WhatsApp</a>
+
+    <form onsubmit="sendToWhatsApp(event)">
+      <textarea name="story" rows="6" placeholder="Type your story here... (Your name won't be required)"></textarea>
+      <button type="submit" class="submit-btn">Send My Story</button>
+    </form>
+  </header>
+
+  <main>
+    <section>
+      <h2 onclick="toggleContent('about')">About</h2>
+      <div id="about" class="content">
+        <p>Dear Nobody is a place where your feelings are free to exist. It's for those moments when you need to share your heart, but can't find the words. Whether it's the pain of a broken heart, the weight of regret, or the relief of closure, your story matters. We take your words and turn them into something real, something that speaks to the heart and connects with others who feel the same. Here, your voice is heard, and it means everything.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 onclick="toggleContent('howItWorks')">How It Works</h2>
+      <div id="howItWorks" class="content">
+        <p>1. You send your story (real or fictional) to us via WhatsApp.<br>
+           2. We turn it into a short video story — text-based, with sound and visuals.<br>
+           3. Your identity stays hidden. Always.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 onclick="toggleContent('pricing')">Pricing</h2>
+      <div id="pricing" class="content">
+        <p>We're currently offering storytelling at a flat rate.<br>
+           Want your story told your way? Reach out for custom features and pricing.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 onclick="toggleContent('faqs')">FAQs</h2>
+      <div id="faqs" class="content">
+        <p><strong>Q: Can I stay anonymous?</strong><br>A: Yes. 100%.
+        <br><br><strong>Q: Can I send a voice note instead?</strong><br>A: Yes, we can transcribe it.
+        <br><br><strong>Q: Can you help edit my story?</strong><br>A: Absolutely. We’ll polish it with care.
+        <br><br><strong>Q: What if my story is too long?</strong><br>A: Don't worry! We can shorten it without losing the essence.
+        <br><br><strong>Q: How fast will my story be turned into a video?</strong><br>A: We aim to complete your story in 2-3 business days.
+        <br><br><strong>Q: Can I request specific visuals or music for my story?</strong><br>A: Yes, we can customize your story with your preferences.
+        <br><br><strong>Q: How do I submit my story?</strong><br>A: Just send it to us via WhatsApp, and we’ll take it from there!</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
